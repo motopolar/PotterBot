@@ -2,8 +2,8 @@ let fs = require('fs')
 
 let handler = async (m, { conn, text, isROwner, isOwner }) => {
     if (fs.existsSync('media/menu/welcome.jpg')) {
-        global.db.data.chats[m.chat].sWelcome = 'media/menu/welcome.jpg'
-        conn.reply(m.chat, lenguajeGB.smsSetW(), fkontak, m)
+        let imageBuffer = fs.readFileSync('media/menu/welcome.jpg')
+        conn.sendMessage(m.chat, imageBuffer, 'imageMessage', { quoted: m, caption: lenguajeGB.smsSetW() })
     } else {
         throw `${lenguajeGB['smsSetW2']()}`
     }
